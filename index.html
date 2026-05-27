@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebKe – Websites for Kenyan Businesses</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #00b359;
+    --dark-green: #007a3d;
+    --black: #0a0a0a;
+    --off-white: #f5f2eb;
+    --warm-white: #faf8f4;
+    --red: #bb0000;
+    --accent: #ffe066;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 2rem;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1.5px solid #e0ddd5;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    letter-spacing: -1px;
+    color: var(--black);
+  }
+  .logo span { color: var(--green); }
+
+  .nav-cta {
+    background: var(--green);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.55rem 1.3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--dark-green); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(0,179,89,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(255,224,102,0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .flag-stripe {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(to right, var(--black) 33.3%, var(--red) 33.3%, var(--red) 66.6%, var(--green) 66.6%);
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--black);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    line-height: 1.02;
+    letter-spacing: -2px;
+    max-width: 750px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--green);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 480px;
+    line-height: 1.6;
+    margin-top: 1.5rem;
+    font-weight: 300;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin-top: 2.5rem;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--black);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { background: var(--green); transform: translateY(-2px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--black);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    border: 2px solid var(--black);
+    transition: transform 0.2s, border-color 0.2s, color 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-secondary:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #ddd;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+
+  .stat-item {}
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--green);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    background: var(--black);
+    padding: 1rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-block;
+    animation: marquee 18s linear infinite;
+  }
+  .marquee-track span {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 2rem;
+  }
+  .marquee-track span.dot { color: var(--green); margin: 0 0.5rem; }
+
+  /* PRICING */
+  .section {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 3rem;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .pricing-card {
+    background: #fff;
+    border: 1.5px solid #e8e5de;
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .pricing-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
+
+  .pricing-card.featured {
+    background: var(--black);
+    border-color: var(--black);
+    color: #fff;
+  }
+
+  .featured-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--green);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.25rem 0.9rem;
+    border-radius: 50px;
+    white-space: nowrap;
+  }
+
+  .plan-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    color: inherit;
+  }
+  .pricing-card.featured .plan-name { color: var(--green); }
+
+  .plan-price {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+    margin: 0.5rem 0;
+    line-height: 1;
+  }
+  .plan-price small {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.6;
+  }
+
+  .plan-desc {
+    font-size: 0.85rem;
+    opacity: 0.6;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .plan-features {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+  .plan-features li {
+    font-size: 0.9rem;
+    padding: 0.4rem 0;
+    display: flex; align-items: center; gap: 0.6rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .pricing-card.featured .plan-features li { border-bottom-color: rgba(255,255,255,0.08); }
+  .plan-features li::before {
+    content: '✓';
+    color: var(--green);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .plan-btn {
+    display: block; width: 100%; text-align: center;
+    padding: 0.85rem;
+    border-radius: 50px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .plan-btn:hover { transform: translateY(-2px); }
+
+  .plan-btn-light {
+    background: var(--off-white);
+    color: var(--black);
+    border: 1.5px solid #ddd;
+  }
+  .plan-btn-light:hover { background: var(--green); color: #fff; border-color: var(--green); }
+
+  .plan-btn-dark {
+    background: var(--green);
+    color: #fff;
+  }
+  .plan-btn-dark:hover { background: #00cc66; }
+
+  /* ORDER FORM */
+  .form-section {
+    background: var(--black);
+    color: #fff;
+    padding: 5rem 2rem;
+  }
+
+  .form-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .form-inner .section-label { color: var(--accent); }
+  .form-inner .section-title { color: #fff; margin-bottom: 0.5rem; }
+  .form-sub { color: #aaa; margin-bottom: 2.5rem; font-size: 0.95rem; }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .form-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #aaa;
+  }
+
+  input, select, textarea {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+  }
+  input::placeholder, textarea::placeholder { color: #555; }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--green);
+    background: rgba(0,179,89,0.06);
+  }
+  select option { background: #1a1a1a; }
+
+  textarea { resize: vertical; min-height: 130px; }
+
+  .submit-btn {
+    width: 100%; margin-top: 1rem;
+    background: var(--green);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, transform 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+  .submit-btn:hover { background: #00cc66; transform: translateY(-2px); }
+
+  .success-msg {
+    display: none;
+    background: rgba(0,179,89,0.15);
+    border: 1.5px solid var(--green);
+    border-radius: 12px;
+    padding: 1.2rem;
+    text-align: center;
+    color: var(--green);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    margin-top: 1rem;
+  }
+
+  /* WHY US */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  .why-card {
+    padding: 1.5rem;
+    border-radius: 16px;
+    background: #fff;
+    border: 1.5px solid #e8e5de;
+    transition: transform 0.2s;
+  }
+  .why-card:hover { transform: translateY(-4px); }
+
+  .why-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .why-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .why-desc {
+    font-size: 0.85rem;
+    color: #777;
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    color: #fff;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid #222;
+  }
+
+  footer .logo { display: inline-block; margin-bottom: 0.5rem; }
+  footer p { color: #666; font-size: 0.8rem; margin-top: 0.3rem; }
+
+  .whatsapp-float {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+    background: #25D366;
+    color: #fff;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    transition: transform 0.2s;
+  }
+  .whatsapp-float:hover { transform: scale(1.1); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Web<span>Ke</span></div>
+  <a href="#order" class="nav-cta">Order a Website →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="flag-stripe"></div>
+  <div class="hero-tag">🇰🇪 Made for Kenya</div>
+  <h1>Your Business Deserves a <em>Website</em></h1>
+  <p class="hero-sub">We build fast, beautiful websites for Kenyan businesses — salons, shops, churches, schools & more. Affordable prices, quick delivery.</p>
+  <div class="hero-actions">
+    <a href="#order" class="btn-primary">Get Your Website →</a>
+    <a href="#pricing" class="btn-secondary">See Prices</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Days Delivery</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">KSh</div>
+      <div class="stat-label">Affordable Prices</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Satisfaction</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Salons</span><span class="dot">✦</span>
+    <span>Shops</span><span class="dot">✦</span>
+    <span>Churches</span><span class="dot">✦</span>
+    <span>Schools</span><span class="dot">✦</span>
+    <span>Restaurants</span><span class="dot">✦</span>
+    <span>Clinics</span><span class="dot">✦</span>
+    <span>Hardware</span><span class="dot">✦</span>
+    <span>Hotels</span><span class="dot">✦</span>
+    <span>NGOs</span><span class="dot">✦</span>
+    <span>Freelancers</span><span class="dot">✦</span>
+    <span>Salons</span><span class="dot">✦</span>
+    <span>Shops</span><span class="dot">✦</span>
+    <span>Churches</span><span class="dot">✦</span>
+    <span>Schools</span><span class="dot">✦</span>
+    <span>Restaurants</span><span class="dot">✦</span>
+    <span>Clinics</span><span class="dot">✦</span>
+    <span>Hardware</span><span class="dot">✦</span>
+    <span>Hotels</span><span class="dot">✦</span>
+    <span>NGOs</span><span class="dot">✦</span>
+    <span>Freelancers</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- WHY US -->
+<section class="section">
+  <div class="section-label">Why WebKe</div>
+  <div class="section-title">We Make It Simple<br>& Affordable</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <div class="why-title">Fast Delivery</div>
+      <div class="why-desc">Get your website ready in as little as 3 days. No long waiting periods.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💰</div>
+      <div class="why-title">Affordable</div>
+      <div class="why-desc">Prices starting from KSh 4,300. Quality websites that don't break the bank.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📱</div>
+      <div class="why-title">Mobile Friendly</div>
+      <div class="why-desc">All our websites look great on phones, tablets and computers.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🤝</div>
+      <div class="why-title">Local Support</div>
+      <div class="why-desc">We're based in Kenya. Reach us anytime on WhatsApp for support.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-label">Pricing</div>
+  <div class="section-title">Simple, Honest Prices</div>
+  <div class="pricing-grid">
+
+    <div class="pricing-card">
+      <div class="plan-name">Basic</div>
+      <div class="plan-price">KSh 4,300<small>/once</small></div>
+      <div class="plan-desc">Perfect for small businesses just getting started online.</div>
+      <ul class="plan-features">
+        <li>Up to 3 pages</li>
+        <li>Mobile friendly design</li>
+        <li>Contact info & map</li>
+        <li>WhatsApp button</li>
+        <li>Delivered in 3 days</li>
+      </ul>
+      <a href="#order" class="plan-btn plan-btn-light">Order Now</a>
+    </div>
+
+    <div class="pricing-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <div class="plan-name">Business</div>
+      <div class="plan-price">KSh 7,000<small>/once</small></div>
+      <div class="plan-desc">Great for shops, salons, and growing businesses.</div>
+      <ul class="plan-features">
+        <li>Up to 6 pages</li>
+        <li>Photo gallery</li>
+        <li>Services & pricing page</li>
+        <li>Google Maps integration</li>
+        <li>Social media links</li>
+        <li>Delivered in 5 days</li>
+      </ul>
+      <a href="#order" class="plan-btn plan-btn-dark">Order Now</a>
+    </div>
+
+    <div class="pricing-card">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price">KSh 10,000<small>/once</small></div>
+      <div class="plan-desc">Full package for serious businesses that want to stand out.</div>
+      <ul class="plan-features">
+        <li>Unlimited pages</li>
+        <li>Custom logo design</li>
+        <li>Online booking/order form</li>
+        <li>SEO setup</li>
+        <li>1 month free support</li>
+        <li>Delivered in 7 days</li>
+      </ul>
+      <a href="#order" class="plan-btn plan-btn-light">Order Now</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ORDER FORM -->
+<section class="form-section" id="order">
+  <div class="form-inner">
+    <div class="section-label">Place Your Order</div>
+    <div class="section-title">Tell Us What You Need</div>
+    <p class="form-sub">Fill in the form below and we'll get back to you on WhatsApp within 24 hours.</p>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="name" placeholder="e.g. John Kamau">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp Number</label>
+        <input type="tel" id="phone" placeholder="e.g. 0712 345 678">
+      </div>
+      <div class="form-group">
+        <label>Business Name</label>
+        <input type="text" id="business" placeholder="e.g. Kamau Hardware">
+      </div>
+      <div class="form-group">
+        <label>Package</label>
+        <select id="package">
+          <option value="">Select a package</option>
+          <option value="Basic – KSh 4,300">Basic – KSh 4,300</option>
+          <option value="Business – KSh 7,000">Business – KSh 7,000</option>
+          <option value="Premium – KSh 10,000">Premium – KSh 10,000</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Describe Your Website</label>
+        <textarea id="description" placeholder="Tell us what pages you need, what colors you like, what your business does, any examples you like..."></textarea>
+      </div>
+    </div>
+
+    <button class="submit-btn" onclick="submitOrder()">
+      Send Order via WhatsApp 📲
+    </button>
+
+    <div class="success-msg" id="successMsg">
+      ✅ Redirecting you to WhatsApp...
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Web<span style="color:var(--green)">Ke</span></div>
+  <p>Websites for Kenyan Businesses · WhatsApp: 0752 964 898</p>
+  <p style="margin-top:0.3rem">© 2026 WebKe. All rights reserved.</p>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/254752964898" target="_blank" class="whatsapp-float" title="Chat on WhatsApp">💬</a>
+
+<script>
+function submitOrder() {
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const business = document.getElementById('business').value.trim();
+  const pkg = document.getElementById('package').value;
+  const desc = document.getElementById('description').value.trim();
+
+  if (!name || !phone || !business || !pkg || !desc) {
+    alert('Please fill in all fields before submitting.');
+    return;
+  }
+
+  const msg = `Hello WebKe! 👋\n\n*New Website Order*\n\n👤 Name: ${name}\n📱 WhatsApp: ${phone}\n🏢 Business: ${business}\n📦 Package: ${pkg}\n\n📝 Description:\n${desc}\n\nPlease get back to me. Thank you!`;
+
+  const encoded = encodeURIComponent(msg);
+  const url = `https://wa.me/254752964898?text=${encoded}`;
+
+  document.getElementById('successMsg').style.display = 'block';
+  setTimeout(() => { window.open(url, '_blank'); }, 800);
+}
+</script>
+
+</body>
+</html>
